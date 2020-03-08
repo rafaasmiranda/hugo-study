@@ -1,0 +1,20 @@
+---
+- name: Install Apache on CentOS. Deploy super elaborate static site
+  hosts: himura
+  become: yes
+
+  tasks:
+    - name: Install Apache Web Server
+      dnf:
+        name: httpd
+        update_cache: yes
+        state: present
+
+    - name: Enable http traffic on firewall
+      firewalld:
+        state: enabled
+        zone: public
+        service: http
+        immediate: yes
+        permanent: yes
+...
